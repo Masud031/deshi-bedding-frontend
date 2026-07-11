@@ -1,0 +1,126 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --font-display: "Fraunces", "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-gold: var(--gold);
+  --color-wood: var(--wood);
+
+  --shadow-soft: 0 10px 30px -12px oklch(0.35 0.08 50 / 0.18);
+  --shadow-elegant: 0 24px 60px -24px oklch(0.35 0.08 50 / 0.30);
+}
+
+:root {
+  --radius: 0.9rem;
+
+  /* Brand palette - warm Bangladeshi traditional */
+  --background: oklch(0.992 0.012 85);        /* #FFFDF8 */
+  --foreground: oklch(0.22 0.01 60);          /* #222222 */
+
+  --cream: oklch(0.94 0.035 85);              /* #F5E6C8 warm cream */
+  --cream-deep: oklch(0.88 0.045 80);
+  --gold: oklch(0.66 0.13 75);                /* #C28B2C golden mustard */
+  --wood: oklch(0.42 0.10 50);                /* #8B4513 wood brown */
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+
+  --primary: oklch(0.42 0.10 50);             /* wood brown */
+  --primary-foreground: oklch(0.98 0.01 85);
+
+  --secondary: oklch(0.94 0.035 85);          /* cream */
+  --secondary-foreground: oklch(0.30 0.06 50);
+
+  --muted: oklch(0.96 0.018 85);
+  --muted-foreground: oklch(0.46 0.03 60);
+
+  --accent: oklch(0.66 0.13 75);              /* golden mustard */
+  --accent-foreground: oklch(0.22 0.01 60);
+
+  --destructive: oklch(0.58 0.20 28);
+  --destructive-foreground: oklch(0.98 0.01 85);
+
+  --border: oklch(0.90 0.025 80);
+  --input: oklch(0.92 0.022 80);
+  --ring: oklch(0.66 0.13 75);
+}
+
+.dark {
+  --background: oklch(0.18 0.015 60);
+  --foreground: oklch(0.95 0.02 85);
+  --card: oklch(0.22 0.02 60);
+  --card-foreground: oklch(0.95 0.02 85);
+  --popover: oklch(0.22 0.02 60);
+  --popover-foreground: oklch(0.95 0.02 85);
+  --primary: oklch(0.66 0.13 75);
+  --primary-foreground: oklch(0.18 0.015 60);
+  --secondary: oklch(0.28 0.03 60);
+  --secondary-foreground: oklch(0.95 0.02 85);
+  --muted: oklch(0.26 0.02 60);
+  --muted-foreground: oklch(0.72 0.03 80);
+  --accent: oklch(0.66 0.13 75);
+  --accent-foreground: oklch(0.18 0.015 60);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.66 0.13 75);
+  --cream: oklch(0.32 0.04 70);
+  --cream-deep: oklch(0.28 0.04 70);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility container-x {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 80rem;
+  @media (min-width: 768px) { padding-inline: 2rem; }
+}
