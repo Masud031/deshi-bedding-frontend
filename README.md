@@ -29,5 +29,5 @@ Modern e-commerce frontend for Deshi Bedding.
 ## Installation
 
 ```bash
-npm install
-npm run dev
+bun install
+bun run dev
