@@ -159,7 +159,7 @@ const SEASONS = [
           </div>
           <Link to="/shop" className="text-sm font-semibold text-primary hover:text-accent flex items-center gap-1.5">Shop all <ArrowRight className="h-4 w-4" /></Link>
         </div>
-        <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        {/* <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"> */}
 
 
           <div className="mt-10 grid grid-cols-2 gap-4 md:gap-6 lg:grid-cols-4">
@@ -182,7 +182,7 @@ const SEASONS = [
       ))
   )}
 </div>
-        </div>
+        {/* </div> */}
       </section>
 
       {/* WHY CHOOSE US */}

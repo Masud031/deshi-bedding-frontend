@@ -26,10 +26,19 @@ import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShopIndexRouteImport } from './routes/shop/index'
 import { Route as ShopProductIdRouteImport } from './routes/shop/$productId'
-import { Route as DashboardUserRouteImport } from './routes/dashboard/user'
 import { Route as DashboardAdminRouteImport } from './routes/dashboard/admin'
+import { Route as DashboardUserIndexRouteImport } from './routes/dashboard/user/index'
 import { Route as DashboardAdminIndexRouteImport } from './routes/dashboard/admin/index'
+import { Route as DashboardUserReviewsRouteImport } from './routes/dashboard/user/reviews'
+import { Route as DashboardUserProfileRouteImport } from './routes/dashboard/user/profile'
+import { Route as DashboardUserPaymentsRouteImport } from './routes/dashboard/user/payments'
+import { Route as DashboardUserMyOrdersRouteImport } from './routes/dashboard/user/my-orders'
+import { Route as DashboardAdminManageUsersRouteImport } from './routes/dashboard/admin/manage-users'
+import { Route as DashboardAdminManageProductsRouteImport } from './routes/dashboard/admin/manage-products'
 import { Route as DashboardAdminAddProductRouteImport } from './routes/dashboard/admin/add-product'
+import { Route as DashboardAdminManageOrdersRouteImport } from './routes/dashboard/admin/Manage-Orders'
+import { Route as DashboardAdminOrderIdRouteImport } from './routes/dashboard/admin/$orderId'
+import { Route as DashboardAdminUpdateProductProductIdRouteImport } from './routes/dashboard/admin/update-product/$productId'
 
 const SuccessRoute = SuccessRouteImport.update({
   id: '/success',
@@ -116,14 +125,14 @@ const ShopProductIdRoute = ShopProductIdRouteImport.update({
   path: '/$productId',
   getParentRoute: () => ShopRoute,
 } as any)
-const DashboardUserRoute = DashboardUserRouteImport.update({
-  id: '/user',
-  path: '/user',
-  getParentRoute: () => DashboardRouteRoute,
-} as any)
 const DashboardAdminRoute = DashboardAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+const DashboardUserIndexRoute = DashboardUserIndexRouteImport.update({
+  id: '/user/',
+  path: '/user/',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
 const DashboardAdminIndexRoute = DashboardAdminIndexRouteImport.update({
@@ -131,10 +140,59 @@ const DashboardAdminIndexRoute = DashboardAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardAdminRoute,
 } as any)
+const DashboardUserReviewsRoute = DashboardUserReviewsRouteImport.update({
+  id: '/user/reviews',
+  path: '/user/reviews',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+const DashboardUserProfileRoute = DashboardUserProfileRouteImport.update({
+  id: '/user/profile',
+  path: '/user/profile',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+const DashboardUserPaymentsRoute = DashboardUserPaymentsRouteImport.update({
+  id: '/user/payments',
+  path: '/user/payments',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+const DashboardUserMyOrdersRoute = DashboardUserMyOrdersRouteImport.update({
+  id: '/user/my-orders',
+  path: '/user/my-orders',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+const DashboardAdminManageUsersRoute =
+  DashboardAdminManageUsersRouteImport.update({
+    id: '/manage-users',
+    path: '/manage-users',
+    getParentRoute: () => DashboardAdminRoute,
+  } as any)
+const DashboardAdminManageProductsRoute =
+  DashboardAdminManageProductsRouteImport.update({
+    id: '/manage-products',
+    path: '/manage-products',
+    getParentRoute: () => DashboardAdminRoute,
+  } as any)
 const DashboardAdminAddProductRoute =
   DashboardAdminAddProductRouteImport.update({
     id: '/add-product',
     path: '/add-product',
+    getParentRoute: () => DashboardAdminRoute,
+  } as any)
+const DashboardAdminManageOrdersRoute =
+  DashboardAdminManageOrdersRouteImport.update({
+    id: '/Manage-Orders',
+    path: '/Manage-Orders',
+    getParentRoute: () => DashboardAdminRoute,
+  } as any)
+const DashboardAdminOrderIdRoute = DashboardAdminOrderIdRouteImport.update({
+  id: '/$orderId',
+  path: '/$orderId',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
+const DashboardAdminUpdateProductProductIdRoute =
+  DashboardAdminUpdateProductProductIdRouteImport.update({
+    id: '/update-product/$productId',
+    path: '/update-product/$productId',
     getParentRoute: () => DashboardAdminRoute,
   } as any)
 
@@ -155,11 +213,20 @@ export interface FileRoutesByFullPath {
   '/shop': typeof ShopRouteWithChildren
   '/success': typeof SuccessRoute
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
-  '/dashboard/user': typeof DashboardUserRoute
   '/shop/$productId': typeof ShopProductIdRoute
   '/shop/': typeof ShopIndexRoute
+  '/dashboard/admin/$orderId': typeof DashboardAdminOrderIdRoute
+  '/dashboard/admin/Manage-Orders': typeof DashboardAdminManageOrdersRoute
   '/dashboard/admin/add-product': typeof DashboardAdminAddProductRoute
+  '/dashboard/admin/manage-products': typeof DashboardAdminManageProductsRoute
+  '/dashboard/admin/manage-users': typeof DashboardAdminManageUsersRoute
+  '/dashboard/user/my-orders': typeof DashboardUserMyOrdersRoute
+  '/dashboard/user/payments': typeof DashboardUserPaymentsRoute
+  '/dashboard/user/profile': typeof DashboardUserProfileRoute
+  '/dashboard/user/reviews': typeof DashboardUserReviewsRoute
   '/dashboard/admin/': typeof DashboardAdminIndexRoute
+  '/dashboard/user/': typeof DashboardUserIndexRoute
+  '/dashboard/admin/update-product/$productId': typeof DashboardAdminUpdateProductProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -176,11 +243,20 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/reviews': typeof ReviewsRoute
   '/success': typeof SuccessRoute
-  '/dashboard/user': typeof DashboardUserRoute
   '/shop/$productId': typeof ShopProductIdRoute
   '/shop': typeof ShopIndexRoute
+  '/dashboard/admin/$orderId': typeof DashboardAdminOrderIdRoute
+  '/dashboard/admin/Manage-Orders': typeof DashboardAdminManageOrdersRoute
   '/dashboard/admin/add-product': typeof DashboardAdminAddProductRoute
+  '/dashboard/admin/manage-products': typeof DashboardAdminManageProductsRoute
+  '/dashboard/admin/manage-users': typeof DashboardAdminManageUsersRoute
+  '/dashboard/user/my-orders': typeof DashboardUserMyOrdersRoute
+  '/dashboard/user/payments': typeof DashboardUserPaymentsRoute
+  '/dashboard/user/profile': typeof DashboardUserProfileRoute
+  '/dashboard/user/reviews': typeof DashboardUserReviewsRoute
   '/dashboard/admin': typeof DashboardAdminIndexRoute
+  '/dashboard/user': typeof DashboardUserIndexRoute
+  '/dashboard/admin/update-product/$productId': typeof DashboardAdminUpdateProductProductIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -200,11 +276,20 @@ export interface FileRoutesById {
   '/shop': typeof ShopRouteWithChildren
   '/success': typeof SuccessRoute
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
-  '/dashboard/user': typeof DashboardUserRoute
   '/shop/$productId': typeof ShopProductIdRoute
   '/shop/': typeof ShopIndexRoute
+  '/dashboard/admin/$orderId': typeof DashboardAdminOrderIdRoute
+  '/dashboard/admin/Manage-Orders': typeof DashboardAdminManageOrdersRoute
   '/dashboard/admin/add-product': typeof DashboardAdminAddProductRoute
+  '/dashboard/admin/manage-products': typeof DashboardAdminManageProductsRoute
+  '/dashboard/admin/manage-users': typeof DashboardAdminManageUsersRoute
+  '/dashboard/user/my-orders': typeof DashboardUserMyOrdersRoute
+  '/dashboard/user/payments': typeof DashboardUserPaymentsRoute
+  '/dashboard/user/profile': typeof DashboardUserProfileRoute
+  '/dashboard/user/reviews': typeof DashboardUserReviewsRoute
   '/dashboard/admin/': typeof DashboardAdminIndexRoute
+  '/dashboard/user/': typeof DashboardUserIndexRoute
+  '/dashboard/admin/update-product/$productId': typeof DashboardAdminUpdateProductProductIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -225,11 +310,20 @@ export interface FileRouteTypes {
     | '/shop'
     | '/success'
     | '/dashboard/admin'
-    | '/dashboard/user'
     | '/shop/$productId'
     | '/shop/'
+    | '/dashboard/admin/$orderId'
+    | '/dashboard/admin/Manage-Orders'
     | '/dashboard/admin/add-product'
+    | '/dashboard/admin/manage-products'
+    | '/dashboard/admin/manage-users'
+    | '/dashboard/user/my-orders'
+    | '/dashboard/user/payments'
+    | '/dashboard/user/profile'
+    | '/dashboard/user/reviews'
     | '/dashboard/admin/'
+    | '/dashboard/user/'
+    | '/dashboard/admin/update-product/$productId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -246,11 +340,20 @@ export interface FileRouteTypes {
     | '/register'
     | '/reviews'
     | '/success'
-    | '/dashboard/user'
     | '/shop/$productId'
     | '/shop'
+    | '/dashboard/admin/$orderId'
+    | '/dashboard/admin/Manage-Orders'
     | '/dashboard/admin/add-product'
+    | '/dashboard/admin/manage-products'
+    | '/dashboard/admin/manage-users'
+    | '/dashboard/user/my-orders'
+    | '/dashboard/user/payments'
+    | '/dashboard/user/profile'
+    | '/dashboard/user/reviews'
     | '/dashboard/admin'
+    | '/dashboard/user'
+    | '/dashboard/admin/update-product/$productId'
   id:
     | '__root__'
     | '/'
@@ -269,11 +372,20 @@ export interface FileRouteTypes {
     | '/shop'
     | '/success'
     | '/dashboard/admin'
-    | '/dashboard/user'
     | '/shop/$productId'
     | '/shop/'
+    | '/dashboard/admin/$orderId'
+    | '/dashboard/admin/Manage-Orders'
     | '/dashboard/admin/add-product'
+    | '/dashboard/admin/manage-products'
+    | '/dashboard/admin/manage-users'
+    | '/dashboard/user/my-orders'
+    | '/dashboard/user/payments'
+    | '/dashboard/user/profile'
+    | '/dashboard/user/reviews'
     | '/dashboard/admin/'
+    | '/dashboard/user/'
+    | '/dashboard/admin/update-product/$productId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -415,18 +527,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopProductIdRouteImport
       parentRoute: typeof ShopRoute
     }
-    '/dashboard/user': {
-      id: '/dashboard/user'
-      path: '/user'
-      fullPath: '/dashboard/user'
-      preLoaderRoute: typeof DashboardUserRouteImport
-      parentRoute: typeof DashboardRouteRoute
-    }
     '/dashboard/admin': {
       id: '/dashboard/admin'
       path: '/admin'
       fullPath: '/dashboard/admin'
       preLoaderRoute: typeof DashboardAdminRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
+    '/dashboard/user/': {
+      id: '/dashboard/user/'
+      path: '/user'
+      fullPath: '/dashboard/user/'
+      preLoaderRoute: typeof DashboardUserIndexRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
     '/dashboard/admin/': {
@@ -436,6 +548,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardAdminIndexRouteImport
       parentRoute: typeof DashboardAdminRoute
     }
+    '/dashboard/user/reviews': {
+      id: '/dashboard/user/reviews'
+      path: '/user/reviews'
+      fullPath: '/dashboard/user/reviews'
+      preLoaderRoute: typeof DashboardUserReviewsRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
+    '/dashboard/user/profile': {
+      id: '/dashboard/user/profile'
+      path: '/user/profile'
+      fullPath: '/dashboard/user/profile'
+      preLoaderRoute: typeof DashboardUserProfileRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
+    '/dashboard/user/payments': {
+      id: '/dashboard/user/payments'
+      path: '/user/payments'
+      fullPath: '/dashboard/user/payments'
+      preLoaderRoute: typeof DashboardUserPaymentsRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
+    '/dashboard/user/my-orders': {
+      id: '/dashboard/user/my-orders'
+      path: '/user/my-orders'
+      fullPath: '/dashboard/user/my-orders'
+      preLoaderRoute: typeof DashboardUserMyOrdersRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
+    '/dashboard/admin/manage-users': {
+      id: '/dashboard/admin/manage-users'
+      path: '/manage-users'
+      fullPath: '/dashboard/admin/manage-users'
+      preLoaderRoute: typeof DashboardAdminManageUsersRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/manage-products': {
+      id: '/dashboard/admin/manage-products'
+      path: '/manage-products'
+      fullPath: '/dashboard/admin/manage-products'
+      preLoaderRoute: typeof DashboardAdminManageProductsRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
     '/dashboard/admin/add-product': {
       id: '/dashboard/admin/add-product'
       path: '/add-product'
@@ -443,17 +597,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardAdminAddProductRouteImport
       parentRoute: typeof DashboardAdminRoute
     }
+    '/dashboard/admin/Manage-Orders': {
+      id: '/dashboard/admin/Manage-Orders'
+      path: '/Manage-Orders'
+      fullPath: '/dashboard/admin/Manage-Orders'
+      preLoaderRoute: typeof DashboardAdminManageOrdersRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/$orderId': {
+      id: '/dashboard/admin/$orderId'
+      path: '/$orderId'
+      fullPath: '/dashboard/admin/$orderId'
+      preLoaderRoute: typeof DashboardAdminOrderIdRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/update-product/$productId': {
+      id: '/dashboard/admin/update-product/$productId'
+      path: '/update-product/$productId'
+      fullPath: '/dashboard/admin/update-product/$productId'
+      preLoaderRoute: typeof DashboardAdminUpdateProductProductIdRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
   }
 }
 
 interface DashboardAdminRouteChildren {
+  DashboardAdminOrderIdRoute: typeof DashboardAdminOrderIdRoute
+  DashboardAdminManageOrdersRoute: typeof DashboardAdminManageOrdersRoute
   DashboardAdminAddProductRoute: typeof DashboardAdminAddProductRoute
+  DashboardAdminManageProductsRoute: typeof DashboardAdminManageProductsRoute
+  DashboardAdminManageUsersRoute: typeof DashboardAdminManageUsersRoute
   DashboardAdminIndexRoute: typeof DashboardAdminIndexRoute
+  DashboardAdminUpdateProductProductIdRoute: typeof DashboardAdminUpdateProductProductIdRoute
 }
 
 const DashboardAdminRouteChildren: DashboardAdminRouteChildren = {
+  DashboardAdminOrderIdRoute: DashboardAdminOrderIdRoute,
+  DashboardAdminManageOrdersRoute: DashboardAdminManageOrdersRoute,
   DashboardAdminAddProductRoute: DashboardAdminAddProductRoute,
+  DashboardAdminManageProductsRoute: DashboardAdminManageProductsRoute,
+  DashboardAdminManageUsersRoute: DashboardAdminManageUsersRoute,
   DashboardAdminIndexRoute: DashboardAdminIndexRoute,
+  DashboardAdminUpdateProductProductIdRoute:
+    DashboardAdminUpdateProductProductIdRoute,
 }
 
 const DashboardAdminRouteWithChildren = DashboardAdminRoute._addFileChildren(
@@ -462,12 +648,20 @@ const DashboardAdminRouteWithChildren = DashboardAdminRoute._addFileChildren(
 
 interface DashboardRouteRouteChildren {
   DashboardAdminRoute: typeof DashboardAdminRouteWithChildren
-  DashboardUserRoute: typeof DashboardUserRoute
+  DashboardUserMyOrdersRoute: typeof DashboardUserMyOrdersRoute
+  DashboardUserPaymentsRoute: typeof DashboardUserPaymentsRoute
+  DashboardUserProfileRoute: typeof DashboardUserProfileRoute
+  DashboardUserReviewsRoute: typeof DashboardUserReviewsRoute
+  DashboardUserIndexRoute: typeof DashboardUserIndexRoute
 }
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardAdminRoute: DashboardAdminRouteWithChildren,
-  DashboardUserRoute: DashboardUserRoute,
+  DashboardUserMyOrdersRoute: DashboardUserMyOrdersRoute,
+  DashboardUserPaymentsRoute: DashboardUserPaymentsRoute,
+  DashboardUserProfileRoute: DashboardUserProfileRoute,
+  DashboardUserReviewsRoute: DashboardUserReviewsRoute,
+  DashboardUserIndexRoute: DashboardUserIndexRoute,
 }
 
 const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(

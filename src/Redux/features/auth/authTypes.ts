@@ -19,9 +19,12 @@ export interface RegisterRequest {
 export interface User {
   _id: string;
   username: string;
+
   email?: string;
   mobile?: string;
-  role: string;
+
+  role: "admin" | "user";
+
   profileImage?: string;
   bio?: string;
   profession?: string;
@@ -42,4 +45,10 @@ export interface UpdateRoleRequest {
 export interface EditProfileRequest {
   id: string;
   profileData: FormData;
+}
+export interface GetUsersResponse {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: User[];
 }

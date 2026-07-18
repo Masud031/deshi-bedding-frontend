@@ -1,15 +1,14 @@
 export interface OrderProduct {
-  productId: string;
-  productCode: string;
-
-  name: string;
-
+   productId: {
+    _id: string;
+    productCode: string;
+    name: string;
+    image: string;
+  };
+ 
   category: string;
 
   color?: string;
-
-  image: string;
-
   size?: string;
 
   quantity: number;
@@ -48,6 +47,8 @@ export interface Order {
 
   fullName: string;
 
+  email?: string;
+
   address: string;
 
   district: string;
@@ -66,5 +67,13 @@ export interface Order {
 
   createdAt: string;
 
+  updatedAt?: string;
+
   products: OrderProduct[];
+}
+
+export interface OrderResponse {
+  success: boolean;
+  message: string;
+  data: Order[];
 }

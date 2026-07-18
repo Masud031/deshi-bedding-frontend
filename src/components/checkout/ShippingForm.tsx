@@ -3,7 +3,6 @@ import { useState } from "react";
 export interface ShippingData {
   fullName: string;
   phone: string;
-  email: string;
   address: string;
   district: string;
   notes: string;
@@ -52,13 +51,7 @@ export default function ShippingForm({
           className="w-full rounded-lg border p-3"
         />
 
-        <input
-          name="email"
-          placeholder="Email"
-          value={value.email}
-          onChange={handleChange}
-          className="w-full rounded-lg border p-3"
-        />
+       
 
         <input
           name="district"

@@ -5,6 +5,7 @@ import { getBaseUrl } from "@/utils/baseurl";
 import type {
   CreateOrderPayload,
   Order,
+  OrderResponse,
 } from "./orderTypes";
 
 export const orderApi = createApi({
@@ -30,14 +31,11 @@ export const orderApi = createApi({
 }),
 
     // User Orders
-    getOrdersByUserId: builder.query<
-      Order[],
-      string
-    >({
-      query: (userId) => `user/id/${userId}`,
+ getOrdersByUserId: builder.query<OrderResponse, string>({
+  query: (userId) => `user/id/${userId}`,
 
-      providesTags: ["Order"],
-    }),
+  providesTags: ["Order"],
+}),
 
     // Email Orders
     getOrdersByEmail: builder.query<
@@ -58,7 +56,7 @@ export const orderApi = createApi({
     }),
 
     // Admin Orders
-    getAllOrders: builder.query<Order[], void>({
+   getAllOrders: builder.query<OrderResponse, void>({
       query: () => "/",
 
       providesTags: ["Order"],
@@ -94,6 +92,19 @@ export const orderApi = createApi({
       invalidatesTags: ["Order"],
     }),
 
+      // Delete order
+        deleteOrderbyId: builder.mutation<
+        void,
+        string
+       > ({
+            query: (id) => ({
+                url: `/delete-order/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: (result, error, id) => [{type:"Order", id }],// Removed "id" reference
+        }),
+    
+
     // Transaction
     getOrderByTransaction: builder.query<
       Order,
@@ -116,4 +127,5 @@ export const {
   useUpdateOrderStatusMutation,
   useDeleteOrderMutation,
   useGetOrderByTransactionQuery,
+  useDeleteOrderbyIdMutation,
 } = orderApi;

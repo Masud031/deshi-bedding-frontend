@@ -30,4 +30,4 @@ Modern e-commerce frontend for Deshi Bedding.
 
 ```bash
 bun install
-bun run dev
+npm run start:dev

@@ -27,7 +27,6 @@ export interface Product {
   oldPrice?: number;
   badge?: string;
 
-
 }
 
 export interface ProductResponse {
@@ -50,4 +49,27 @@ export interface SingleProductResponse {
   success: boolean;
   message: string;
   data: Product;
+}
+
+export interface GetProductsParams {
+  category?: string;
+  color?: string;
+
+  priceMin?: string;
+  priceMax?: string;
+
+   minPrice:string;
+   maxPrice:string;
+
+  page?: number;
+  limit?: number;
+
+  search?: string;
+
+  size?: string | string[];
+
+  style?: string;
+
+  styleCategory?: string;
+ 
 }

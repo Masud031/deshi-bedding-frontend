@@ -1,12 +1,11 @@
 import { useSelector } from "react-redux";
 
-
-// import { useGetAdminStatsQuery } from "@/Redux/features/stats/statsApi";
 import type { RootState } from "@/Redux/store";
+
 import { useGetAdminStatsQuery } from "@/Redux/features/states/statsApi";
+
 import Loading from "@/components/shared/Loading";
 import AdminStats from "./AdminStats";
-
 
 export default function AdminMain() {
   const { user } = useSelector(
@@ -14,7 +13,7 @@ export default function AdminMain() {
   );
 
   const {
-    data: stats,
+    data,
     isLoading,
     error,
   } = useGetAdminStatsQuery();
@@ -31,33 +30,33 @@ export default function AdminMain() {
     );
   }
 
+  const stats = data;
+
   if (!stats) {
     return (
       <div className="p-6">
-        No admin statistics available.
+        No statistics available.
       </div>
     );
   }
 
   return (
-    <div className="space-y-8 p-6">
+    <div className="space-y-8">
 
       <div>
-        <h1 className="text-3xl font-bold text-stone-800">
+        <h1 className="text-3xl font-bold">
           Admin Dashboard
         </h1>
 
-        <p className="mt-2 text-stone-500">
-          Welcome back,{" "}
-          <span className="font-semibold text-amber-700">
+        <p className="mt-2 text-gray-500">
+          Welcome back,
+          <span className="ml-1 font-semibold text-primary">
             {user?.username}
           </span>
         </p>
       </div>
 
       <AdminStats stats={stats} />
-
-      {/* <AdminStatsChart stats={stats} /> */}
 
     </div>
   );

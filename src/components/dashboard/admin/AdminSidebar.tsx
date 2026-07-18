@@ -14,17 +14,17 @@ const navItems = [
     label: "Add Product",
   },
   {
-    to: "/dashboard/manage-products",
+    to: "/dashboard/admin/manage-products",
     label: "Manage Products",
   },
-  {
-    to: "/dashboard/users",
-    label: "Users",
-  },
-  {
-    to: "/dashboard/orders",
-    label: "Orders",
-  },
+ {
+  to: "/dashboard/admin/manage-users",
+  label: "Users",
+},
+ {
+  to: "/dashboard/admin/manage-orders",
+  label: "Orders",
+}
 ];
 
 export default function AdminSidebar() {

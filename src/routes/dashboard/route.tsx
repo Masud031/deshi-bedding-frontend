@@ -11,7 +11,8 @@ import { useEffect, useState } from "react";
 import type { RootState } from "@/Redux/store";
 
 import AdminSidebar from "@/components/dashboard/admin/AdminSidebar";
-import UserSidebar from "@/components/dashboard/user/UserSidebar";
+import UserSidebar from "@/components/dashboard/user/UserDsidebar";
+
 
 export const Route = createFileRoute("/dashboard")({
   component: DashboardLayout,

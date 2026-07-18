@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useParams } from "@tanstack/react-router";
 import { useGetSingleProductQuery } from "@/Redux/products/productsApi";
+import ProductReviewList from "@/components/product/ProductReviewList";
+import ReviewForm from "@/components/product/ReviewForm";
+
 
 
 
@@ -89,7 +92,7 @@ export default function SingleProductPage() {
 
             <div className="flex flex-wrap gap-3">
 
-              {product.stock.map((item) => (
+              {product.stock.map((item:any) => (
                 <button
                   key={item.size}
                   disabled={item.quantity === 0}
@@ -120,11 +123,19 @@ export default function SingleProductPage() {
 
           {/* Add To Cart */}
 
-          <button
-            className="mt-10 rounded-xl bg-red-600 px-8 py-3 text-white"
-          >
-            Add To Cart
-          </button>
+    <button
+  className="mt-10 rounded-xl bg-red-600 px-8 py-3 text-white"
+>
+  Add To Cart
+</button>
+
+<hr className="my-10" />
+
+<ProductReviewList productId={product._id} />
+
+<hr className="my-10" />
+
+<ReviewForm productId={product._id} />
 
         </div>
 

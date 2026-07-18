@@ -1,47 +1,47 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useDispatch } from "react-redux";
+
 import {
   LayoutDashboard,
-  PackagePlus,
-  Boxes,
-  Users,
   ShoppingBag,
+  CreditCard,
+  User,
+  Star,
   LogOut,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { useLogoutUserMutation } from "@/Redux/features/auth/authApi";
 import { logout } from "@/Redux/features/auth/authSlice";
 
 const navItems = [
   {
-    to: "/dashboard/admin",
+    to: "/dashboard/user",
     label: "Dashboard",
     icon: LayoutDashboard,
   },
   {
-    to: "/dashboard/add-product",
-    label: "Add Product",
-    icon: PackagePlus,
-  },
-  {
-    to: "/dashboard/manage-products",
-    label: "Manage Products",
-    icon: Boxes,
-  },
-  {
-    to: "/dashboard/users",
-    label: "Users",
-    icon: Users,
-  },
-  {
-    to: "/dashboard/manage-orders",
-    label: "Orders",
+     to: "/dashboard/user/my-orders",
+    label: "My Orders",
     icon: ShoppingBag,
+  },
+  {
+    to: "/dashboard/user/payments",
+    label: "Payments",
+    icon: CreditCard,
+  },
+  {
+    to: "/dashboard/profile",
+    label: "Profile",
+    icon: User,
+  },
+  {
+    to: "/dashboard/user/reviews",
+    label: "Reviews",
+    icon: Star,
   },
 ];
 
-export default function AdminSidebar() {
+export default function UserSidebar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -49,10 +49,7 @@ export default function AdminSidebar() {
 
   const handleLogout = async () => {
     try {
-        console.log("Logout clicked");
-
       await logoutUser().unwrap();
-      console.log("API Success");
 
       dispatch(logout());
 
@@ -67,12 +64,10 @@ export default function AdminSidebar() {
   };
 
   return (
-    <aside className="flex h-screen w-72 flex-col justify-between border-r bg-white">
-
-      {/* Logo */}
+    <aside className="flex h-full flex-col justify-between rounded-xl border bg-white p-6 shadow-sm">
       <div>
-
-        <div className="border-b px-6 py-8">
+        {/* Logo */}
+        <div className="mb-6">
           <Link
             to="/"
             className="text-2xl font-bold text-amber-700"
@@ -81,14 +76,14 @@ export default function AdminSidebar() {
           </Link>
 
           <p className="mt-1 text-sm text-stone-500">
-            Admin Dashboard
+            User Dashboard
           </p>
         </div>
 
+        <hr className="mb-6" />
+
         {/* Navigation */}
-
-        <nav className="space-y-2 p-5">
-
+        <nav className="space-y-2">
           {navItems.map((item) => {
             const Icon = item.icon;
 
@@ -98,36 +93,33 @@ export default function AdminSidebar() {
                 to={item.to}
                 activeProps={{
                   className:
-                    "bg-amber-100 text-amber-700 font-semibold",
+                    "flex items-center gap-3 rounded-lg bg-amber-100 px-4 py-3 font-semibold text-amber-700",
                 }}
-                className="flex items-center gap-3 rounded-lg px-4 py-3 text-stone-700 transition hover:bg-amber-50 hover:text-amber-700"
+                inactiveProps={{
+                  className:
+                    "flex items-center gap-3 rounded-lg px-4 py-3 text-stone-600 hover:bg-stone-100",
+                }}
               >
-                <Icon size={20} />
-
-                <span>{item.label}</span>
+                <Icon size={18} />
+                {item.label}
               </Link>
             );
           })}
-
         </nav>
       </div>
 
       {/* Logout */}
+      <div>
+        <hr className="mb-4" />
 
-      <div className="border-t p-5">
-
-        <Button
+        <button
           onClick={handleLogout}
-          variant="destructive"
-          className="w-full"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 px-4 py-3 font-medium text-white transition hover:bg-red-700"
         >
-          <LogOut className="mr-2 h-4 w-4" />
-
+          <LogOut size={18} />
           Logout
-        </Button>
-
+        </button>
       </div>
-
     </aside>
   );
 }

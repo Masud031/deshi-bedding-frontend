@@ -5,6 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type {
   AuthResponse,
   EditProfileRequest,
+  GetUsersResponse,
   LoginRequest,
   RegisterRequest,
   UpdateRoleRequest,
@@ -55,11 +56,10 @@ export const authApi = createApi({
     }),
 
     // Get All Users
-    getUsers: builder.query<User[], void>({
-      query: () => "/users",
-
-      providesTags: ["User"],
-    }),
+   getUsers: builder.query<GetUsersResponse, void>({
+  query: () => "/users",
+  providesTags: ["User"],
+}),
 
     // Delete User
     deleteUser: builder.mutation<void, string>({

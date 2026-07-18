@@ -3,10 +3,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./features/auth/authSlice";
 import { authApi } from "./features/auth/authApi";
 import { statsApi } from "./features/states/statsApi";
-import { productsApi } from "./products/productsApi";
+
 import { uploadApi } from "./features/upload/uploadApi";
 import cartReducer from "./cart/cartSlice";
 import { orderApi } from "./order/orderApi";
+import productsApi from "./products/productsApi";
+import { reviewsApi } from "./features/reviews/reviewsApi";
 
 
 export const store = configureStore({
@@ -19,6 +21,7 @@ export const store = configureStore({
     [productsApi.reducerPath]: productsApi.reducer,
     [uploadApi.reducerPath]: uploadApi.reducer,
     [orderApi.reducerPath]: orderApi.reducer,
+     [reviewsApi.reducerPath]:reviewsApi.reducer,
   },
 
    middleware: (getDefaultMiddleware) =>
@@ -28,6 +31,7 @@ export const store = configureStore({
       statsApi.middleware,
       uploadApi.middleware,
       orderApi.middleware,
+      reviewsApi.middleware,
     ),
 });
 

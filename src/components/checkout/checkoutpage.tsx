@@ -19,7 +19,6 @@ export default function CheckoutPage() {
     useState<ShippingData>({
       fullName: "",
       phone: "",
-      email: "",
       address: "",
       district: "",
       notes: "",

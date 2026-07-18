@@ -6,8 +6,9 @@ import {
   Star,
 } from "lucide-react";
 
-import type { Product } from "@/Redux/products/productTypes";
 import { useDispatch } from "react-redux";
+
+import type { Product } from "@/Redux/products/productTypes";
 import { AppDispatch } from "@/Redux/store";
 import { addToCart } from "@/Redux/cart/cartSlice";
 
@@ -18,44 +19,38 @@ type ProductCardProps = {
 export function ProductCard({
   p,
 }: ProductCardProps) {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
   const hasDiscount =
     p.oldPrice && p.oldPrice > p.price;
 
-   const dispatch = useDispatch<AppDispatch>();
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        _id: p._id,
+        productCode: p.productCode,
+        name: p.name,
+        image: p.image,
+        category: p.category,
+        color: p.color,
+        selectedSize: "Default",
+        price: p.price,
+        quantity: 1,
+      })
+    );
 
-   const navigate = useNavigate();
-
-//  handle add to cart//
- const handleAddToCart = () => {
-  dispatch(
-    addToCart({
-      _id: p._id,
-      productCode: p.productCode,
-
-      name: p.name,
-      image: p.image,
-
-      category: p.category,
-      color: p.color,
-
-      selectedSize: "Default",
-
-      price: p.price,
-
-      quantity: 1,
-    })
-  );
-   navigate({
-    to: "/cart",
-  });
-};
+    navigate({
+      to: "/cart",
+    });
+  };
 
   return (
-    <article className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card transition-all hover:border-accent/40 hover:shadow-[var(--shadow-elegant)]">
+    <article className="group overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl">
 
       {/* Product Image */}
 
-      <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
+      <div className="relative aspect-[4/5] overflow-hidden bg-white">
 
         <Link
           to="/shop/$productId"
@@ -63,26 +58,31 @@ export function ProductCard({
             productId: p._id,
           }}
         >
-      <img
-      src={p.image || "/placeholder.png"}
-      alt={p.name}
-      className="absolute inset-0 h-full w-full object-cover"
-    />
+          <div className="flex h-full w-full items-center justify-center p-5">
+
+            <img
+              src={p.image || "/placeholder.png"}
+              alt={p.name}
+              loading="lazy"
+              className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+            />
+
+          </div>
         </Link>
 
         {/* Badge */}
 
         {p.badge && (
-          <span className="absolute left-3 top-3 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
+          <span className="absolute left-3 top-3 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white shadow">
             {p.badge}
           </span>
         )}
 
-        {/* Action Buttons */}
+        {/* Actions */}
 
-        <div className="absolute right-3 top-3 flex flex-col gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div className="absolute right-3 top-3 flex flex-col gap-2 opacity-0 transition duration-300 group-hover:opacity-100">
 
-          <button className="grid h-9 w-9 place-items-center rounded-full bg-white shadow hover:bg-accent hover:text-white">
+          <button className="grid h-10 w-10 place-items-center rounded-full bg-white shadow hover:bg-primary hover:text-white">
             <Heart size={18} />
           </button>
 
@@ -91,7 +91,7 @@ export function ProductCard({
             params={{
               productId: p._id,
             }}
-            className="grid h-9 w-9 place-items-center rounded-full bg-white shadow hover:bg-accent hover:text-white"
+            className="grid h-10 w-10 place-items-center rounded-full bg-white shadow hover:bg-primary hover:text-white"
           >
             <Eye size={18} />
           </Link>
@@ -102,7 +102,7 @@ export function ProductCard({
 
         <button
           onClick={handleAddToCart}
-          className="absolute bottom-3 left-3 right-3 flex translate-y-12 items-center justify-center gap-2 rounded-full bg-primary py-3 text-sm font-semibold text-white transition-all duration-300 group-hover:translate-y-0 hover:bg-accent"
+          className="absolute bottom-4 left-4 right-4 flex translate-y-14 items-center justify-center gap-2 rounded-full bg-primary py-3 text-sm font-semibold text-white transition-all duration-300 group-hover:translate-y-0 hover:bg-accent"
         >
           <ShoppingBag size={18} />
           Add to Cart
@@ -112,21 +112,22 @@ export function ProductCard({
 
       {/* Product Info */}
 
-      <div className="space-y-3 p-4">
+      <div className="space-y-3 p-5">
 
-        <p className="text-xs uppercase tracking-widest text-muted-foreground">
+        <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
           {p.category}
         </p>
 
         <Link
-          to="/shop/$productId"
-          params={{
-            productId: p._id,
-          }}
-          className="block text-lg font-semibold transition hover:text-primary"
-        >
-          {p.name}
-        </Link>
+      to="/shop/$productId"
+      params={{
+        productId: p._id,
+      }}
+      className="line-clamp-2 block min-h-[56px] text-lg font-semibold transition hover:text-primary"
+    >
+      <Star size={18}/>
+      {p.name}
+    </Link>
 
         <div className="flex items-center gap-2 text-sm">
 
